@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Columns;
-
 @Entity
 public class GrupoProduto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +20,7 @@ public class GrupoProduto implements Serializable {
 	
 	@NotNull
 	@NotEmpty
-	@Column()
+	@Column(length=30)
 	private String descricao;
 
 	public GrupoProduto() {
