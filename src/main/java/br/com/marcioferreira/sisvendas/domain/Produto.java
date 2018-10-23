@@ -40,12 +40,16 @@ public class Produto implements Serializable {
 	@JoinColumn(name="grupo_produto_id")
 	private GrupoProduto grupo;
 	
+	@ManyToOne
+	@JoinColumn(name="sub_grupo_produto_id")
+	private SubGrupoProduto subGrupo;
+	
 	public Produto() {
 	}
 	
 	public Produto(Integer id, @NotNull @NotEmpty String codigoBarra, @NotNull @NotEmpty String descricao,
 			Double precoVenda, Double precoCusto, Double estoque, Double estoqueMinimo, Double estoqueMaximo,
-			GrupoProduto grupo) {
+			GrupoProduto grupo, SubGrupoProduto subGrupo) {
 		super();
 		this.id = id;
 		this.codigoBarra = codigoBarra;
@@ -56,9 +60,8 @@ public class Produto implements Serializable {
 		this.estoqueMinimo = estoqueMinimo;
 		this.estoqueMaximo = estoqueMaximo;
 		this.grupo = grupo;
+		this.subGrupo = subGrupo;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -132,6 +135,14 @@ public class Produto implements Serializable {
 		this.grupo = grupo;
 	}
 
+	public SubGrupoProduto getSubGrupo() {
+		return subGrupo;
+	}
+
+	public void setSubGrupo(SubGrupoProduto subGrupo) {
+		this.subGrupo = subGrupo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,7 +150,7 @@ public class Produto implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

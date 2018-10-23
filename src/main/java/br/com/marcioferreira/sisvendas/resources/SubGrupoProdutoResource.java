@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.marcioferreira.sisvendas.domain.GrupoProduto;
-import br.com.marcioferreira.sisvendas.services.GrupoProdutoServices;
+import br.com.marcioferreira.sisvendas.domain.SubGrupoProduto;
+import br.com.marcioferreira.sisvendas.services.SubGrupoProdutoServices;
 
 @RestController
-@RequestMapping(value="/gruposprodutos")
-public class GrupoProdutoResource {
+@RequestMapping(value="/subgruposprodutos")
+public class SubGrupoProdutoResource {
 	
 	@Autowired
-	private GrupoProdutoServices service;
+	private SubGrupoProdutoServices service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		GrupoProduto obj = service.findById(id);
+		SubGrupoProduto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

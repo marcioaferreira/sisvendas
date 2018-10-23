@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class GrupoProduto implements Serializable {
+public class SubGrupoProduto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -29,13 +29,13 @@ public class GrupoProduto implements Serializable {
 	private String descricao;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="subGrupo")
 	private List<Produto> produtos = new ArrayList<>();
 
-	public GrupoProduto() {
+	public SubGrupoProduto() {
 	}
 
-	public GrupoProduto(Integer id, String descricao) {
+	public SubGrupoProduto(Integer id, String descricao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -81,7 +81,7 @@ public class GrupoProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GrupoProduto other = (GrupoProduto) obj;
+		SubGrupoProduto other = (SubGrupoProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
