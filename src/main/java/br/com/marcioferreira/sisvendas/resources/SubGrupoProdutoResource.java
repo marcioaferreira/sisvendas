@@ -18,7 +18,7 @@ public class SubGrupoProdutoResource {
 	private SubGrupoProdutoServices service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<SubGrupoProduto> findById(@PathVariable Integer id) {
 		SubGrupoProduto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
