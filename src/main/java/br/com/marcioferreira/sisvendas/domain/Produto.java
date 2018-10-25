@@ -41,15 +41,15 @@ public class Produto implements Serializable {
 	private GrupoProduto grupo;
 	
 	@ManyToOne
-	@JoinColumn(name="sub_grupo_produto_id")
-	private SubGrupoProduto subGrupo;
+	@JoinColumn(name="familia_produto_id")
+	private FamiliaProduto familia;
 	
 	public Produto() {
 	}
 	
 	public Produto(Integer id, @NotNull @NotEmpty String codigoBarra, @NotNull @NotEmpty String descricao,
 			Double precoVenda, Double precoCusto, Double estoque, Double estoqueMinimo, Double estoqueMaximo,
-			GrupoProduto grupo, SubGrupoProduto subGrupo) {
+			GrupoProduto grupo, FamiliaProduto familia) {
 		super();
 		this.id = id;
 		this.codigoBarra = codigoBarra;
@@ -60,7 +60,7 @@ public class Produto implements Serializable {
 		this.estoqueMinimo = estoqueMinimo;
 		this.estoqueMaximo = estoqueMaximo;
 		this.grupo = grupo;
-		this.subGrupo = subGrupo;
+		this.familia = familia;
 	}
 
 	public Integer getId() {
@@ -135,12 +135,12 @@ public class Produto implements Serializable {
 		this.grupo = grupo;
 	}
 
-	public SubGrupoProduto getSubGrupo() {
-		return subGrupo;
+	public FamiliaProduto getSubGrupo() {
+		return familia;
 	}
 
-	public void setSubGrupo(SubGrupoProduto subGrupo) {
-		this.subGrupo = subGrupo;
+	public void setSubGrupo(FamiliaProduto familia) {
+		this.familia = familia;
 	}
 
 	@Override

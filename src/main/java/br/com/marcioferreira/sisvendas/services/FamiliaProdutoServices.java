@@ -10,34 +10,34 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import br.com.marcioferreira.sisvendas.domain.Produto;
-import br.com.marcioferreira.sisvendas.repositories.ProdutoRepository;
+import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
+import br.com.marcioferreira.sisvendas.repositories.FamiliaProdutoRepository;
 import br.com.marcioferreira.sisvendas.services.exceptions.DataIntegrityException;
 import br.com.marcioferreira.sisvendas.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class ProdutoServices {
+public class FamiliaProdutoServices {
 	
 	@Autowired
-	private ProdutoRepository repo;
+	private FamiliaProdutoRepository repo;
 	
-	public Produto findById(Integer id) {
-		Optional<Produto> obj = repo.findById(id);
+	public FamiliaProduto findById(Integer id) {
+		Optional<FamiliaProduto> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + FamiliaProduto.class.getName()));
 	}
 	
-	public Produto insert(Produto obj) {
+	public FamiliaProduto insert(FamiliaProduto obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
 	
-	public Produto update(Produto obj) {
+	public FamiliaProduto update(FamiliaProduto obj) {
 		findById(obj.getId());
 		return repo.save(obj);
 	}
 	
-	public List<Produto> findAll() {
+	public List<FamiliaProduto> findAll() {
 		return repo.findAll();
 	}
 	
@@ -47,14 +47,13 @@ public class ProdutoServices {
 			repo.deleteById(id);
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir um Grupo que possui produtos");
+			throw new DataIntegrityException("Não é possível excluir uma Família que possui produtos");
 		}
 	}
 
-	public Page<Produto> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<FamiliaProduto> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
 	
-
 }

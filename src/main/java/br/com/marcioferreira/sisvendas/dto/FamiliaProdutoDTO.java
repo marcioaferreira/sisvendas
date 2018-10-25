@@ -6,9 +6,9 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import br.com.marcioferreira.sisvendas.domain.GrupoProduto;
+import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
 
-public class GrupoProdutoDTO implements Serializable {
+public class FamiliaProdutoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -17,10 +17,10 @@ public class GrupoProdutoDTO implements Serializable {
 	@Length(min=5, max=30)
 	private String descricao;
 	
-	public GrupoProdutoDTO() {
+	public FamiliaProdutoDTO() {
 	}
 
-	public GrupoProdutoDTO(GrupoProduto obj) {
+	public FamiliaProdutoDTO(FamiliaProduto obj) {
 		super();
 		this.id = obj.getId();
 		this.descricao = obj.getDescricao();

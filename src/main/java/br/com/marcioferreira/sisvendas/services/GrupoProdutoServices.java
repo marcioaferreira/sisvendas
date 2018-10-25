@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.marcioferreira.sisvendas.domain.GrupoProduto;
+import br.com.marcioferreira.sisvendas.dto.GrupoProdutoDTO;
 import br.com.marcioferreira.sisvendas.repositories.GrupoProdutoRepository;
 import br.com.marcioferreira.sisvendas.services.exceptions.DataIntegrityException;
 import br.com.marcioferreira.sisvendas.services.exceptions.ObjectNotFoundException;
@@ -54,6 +55,10 @@ public class GrupoProdutoServices {
 	public Page<GrupoProduto> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public GrupoProduto fromDTO(GrupoProdutoDTO objDto) {
+		return new GrupoProduto(objDto.getId(), objDto.getDescricao());
 	}
 	
 }

@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,33 +15,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.marcioferreira.sisvendas.domain.GrupoProduto;
-import br.com.marcioferreira.sisvendas.dto.GrupoProdutoDTO;
-import br.com.marcioferreira.sisvendas.services.GrupoProdutoServices;
+import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
+import br.com.marcioferreira.sisvendas.dto.FamiliaProdutoDTO;
+import br.com.marcioferreira.sisvendas.services.FamiliaProdutoServices;
 
 @RestController
-@RequestMapping(value="/gruposprodutos")
-public class GrupoProdutoResource {
+@RequestMapping(value="/familiasprodutos")
+public class FamiliaProdutoResource {
 	
 	@Autowired
-	private GrupoProdutoServices service;
+	private FamiliaProdutoServices service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<GrupoProduto> findById(@PathVariable Integer id) {
-		GrupoProduto obj = service.findById(id);
+	public ResponseEntity<FamiliaProduto> findById(@PathVariable Integer id) {
+		FamiliaProduto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<GrupoProdutoDTO>> findAll() {
-		List<GrupoProduto> list = service.findAll();
-		List<GrupoProdutoDTO> listDto = list.stream().map(obj -> new GrupoProdutoDTO(obj)).collect(Collectors.toList());  
+	public ResponseEntity<List<FamiliaProdutoDTO>> findAll() {
+		List<FamiliaProduto> list = service.findAll();
+		List<FamiliaProdutoDTO> listDto = list.stream().map(obj -> new FamiliaProdutoDTO(obj)).collect(Collectors.toList());  
 		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody GrupoProdutoDTO objDto) {
-		GrupoProduto obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> insert(@RequestBody FamiliaProduto obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 			.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -51,7 +48,7 @@ public class GrupoProdutoResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody GrupoProduto obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody FamiliaProduto obj, @PathVariable Integer id) {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -64,13 +61,14 @@ public class GrupoProdutoResource {
 	}
 	
 	@RequestMapping(value="/pagegruposprodutos", method=RequestMethod.GET)
-	public ResponseEntity<Page<GrupoProdutoDTO>> findPage(
+	public ResponseEntity<Page<FamiliaProdutoDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-		Page<GrupoProduto> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<GrupoProdutoDTO> listDto = list.map(obj -> new GrupoProdutoDTO(obj));  
+		Page<FamiliaProduto> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<FamiliaProdutoDTO> listDto = list.map(obj -> new FamiliaProdutoDTO(obj));  
 		return ResponseEntity.ok().body(listDto);
 	}
+
 }
