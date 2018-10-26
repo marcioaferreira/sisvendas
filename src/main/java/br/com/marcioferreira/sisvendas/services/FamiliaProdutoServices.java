@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
+import br.com.marcioferreira.sisvendas.dto.FamiliaProdutoDTO;
 import br.com.marcioferreira.sisvendas.repositories.FamiliaProdutoRepository;
 import br.com.marcioferreira.sisvendas.services.exceptions.DataIntegrityException;
 import br.com.marcioferreira.sisvendas.services.exceptions.ObjectNotFoundException;
@@ -56,4 +57,7 @@ public class FamiliaProdutoServices {
 		return repo.findAll(pageRequest);
 	}
 	
+	public FamiliaProduto fromDTO(FamiliaProdutoDTO objDto) {
+		return new FamiliaProduto(objDto.getId(), objDto.getDescricao());
+	}
 }

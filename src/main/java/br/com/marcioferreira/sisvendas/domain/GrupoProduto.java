@@ -25,7 +25,7 @@ public class GrupoProduto implements Serializable {
 	
 	@NotNull
 	@NotEmpty
-	@Column(length=30)
+	@Column(length=30, unique=true)
 	private String descricao;
 	
 	@JsonIgnore

@@ -41,8 +41,11 @@ public class ProdutoDTO implements Serializable {
 	
 	@PositiveOrZero()
 	@Digits (integer = 6, fraction = 2)
-	private Double estoqueMaximo; 
-
+	private Double estoqueMaximo;
+	
+	private Integer grupo;
+	private Integer familia;
+	
 	public ProdutoDTO() {
 	}
 
@@ -56,6 +59,8 @@ public class ProdutoDTO implements Serializable {
 		this.estoque = obj.getEstoque();
 		this.estoqueMinimo = obj.getEstoqueMinimo();
 		this.estoqueMaximo = obj.getEstoqueMinimo();
+		this.grupo = obj.getGrupo().getId();
+		this.familia = obj.getFamilia().getId();
 	}
 
 	public Integer getId() {
@@ -120,6 +125,22 @@ public class ProdutoDTO implements Serializable {
 
 	public void setEstoqueMaximo(Double estoqueMaximo) {
 		this.estoqueMaximo = estoqueMaximo;
+	}
+
+	public Integer getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Integer grupo) {
+		this.grupo = grupo;
+	}
+
+	public Integer getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(Integer familia) {
+		this.familia = familia;
 	}
 	
 }

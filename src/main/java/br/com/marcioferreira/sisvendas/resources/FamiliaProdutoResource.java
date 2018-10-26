@@ -40,7 +40,8 @@ public class FamiliaProdutoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody FamiliaProduto obj) {
+	public ResponseEntity<Void> insert(@RequestBody FamiliaProdutoDTO objDTO) {
+		FamiliaProduto obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 			.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -48,7 +49,8 @@ public class FamiliaProdutoResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody FamiliaProduto obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody FamiliaProdutoDTO objDTO, @PathVariable Integer id) {
+		FamiliaProduto obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

@@ -22,12 +22,12 @@ public class Produto implements Serializable {
 	
 	@NotNull
 	@NotEmpty
-	@Column(length=13)
+	@Column(length=13, unique=true)
 	private String codigoBarra;
 	
 	@NotNull
 	@NotEmpty
-	@Column(length=50)
+	@Column(length=50, unique=true)
 	private String descricao;
 	
 	private Double precoVenda;
@@ -36,10 +36,12 @@ public class Produto implements Serializable {
 	private Double estoqueMinimo;
 	private Double estoqueMaximo;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="grupo_produto_id")
 	private GrupoProduto grupo;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="familia_produto_id")
 	private FamiliaProduto familia;
@@ -135,11 +137,11 @@ public class Produto implements Serializable {
 		this.grupo = grupo;
 	}
 
-	public FamiliaProduto getSubGrupo() {
+	public FamiliaProduto getFamilia() {
 		return familia;
 	}
 
-	public void setSubGrupo(FamiliaProduto familia) {
+	public void setFamilia(FamiliaProduto familia) {
 		this.familia = familia;
 	}
 

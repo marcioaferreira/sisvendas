@@ -43,8 +43,7 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(ConversionNotSupportedException.class)
 	public ResponseEntity<StandardError> conversion(ConversionNotSupportedException e, HttpServletRequest request){
 		
-		StandardError err = new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), System.currentTimeMillis());
-		System.out.println(err);
+		StandardError err = new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getPropertyChangeEvent().toString(), System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
 	}
 

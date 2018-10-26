@@ -7,12 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
 import br.com.marcioferreira.sisvendas.domain.GrupoProduto;
 import br.com.marcioferreira.sisvendas.domain.Produto;
-import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
+import br.com.marcioferreira.sisvendas.repositories.FamiliaProdutoRepository;
 import br.com.marcioferreira.sisvendas.repositories.GrupoProdutoRepository;
 import br.com.marcioferreira.sisvendas.repositories.ProdutoRepository;
-import br.com.marcioferreira.sisvendas.repositories.FamiliaProdutoRepository;
 
 @SpringBootApplication
 public class SisvendasApplication implements CommandLineRunner {
@@ -24,7 +24,7 @@ public class SisvendasApplication implements CommandLineRunner {
 	private FamiliaProdutoRepository familiaProdutoRepository;
 	
 	@Autowired
-	private ProdutoRepository ProdutoRepository;
+	private ProdutoRepository produtoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SisvendasApplication.class, args);
@@ -37,24 +37,21 @@ public class SisvendasApplication implements CommandLineRunner {
 		GrupoProduto g2 = new GrupoProduto(null, "Still");
 		GrupoProduto g3 = new GrupoProduto(null, "Cerveja");
 		
-		grupoProdutoRepository.saveAll(Arrays.asList(g1, g2, g3));
-		
 		FamiliaProduto f1 = new FamiliaProduto(null, "Consumo Imediato");
 		FamiliaProduto f2 = new FamiliaProduto(null, "Consumo Futuro");
 		
+		Produto p1 = new Produto(null, "0123456789XXX", "Coca Cola Pet 2L", 5.47, 4.82, 1000.0, 500.0, 5000.0, g1, f2);
+		Produto p2 = new Produto(null, "0123456d89XXX", "Fanta Laranja Pet 2L", 4.65, 3.98, 700.0, 300.0, 1000.0, g1, f2);
+		Produto p3 = new Produto(null, "01234567s9XXX", "Sprite Pet 2L", 4.65, 3.98, 300.0, 100.0, 700.0, g1, f2);
+		Produto p4 = new Produto(null, "012345678qXXX", "Coca Cola KS 290ml", 0.95, 1.50, 800.0, 100.0, 500.0, g1, f1);
+		
+		g1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4));
+		f1.getProdutos().addAll(Arrays.asList(p4));
+		f2.getProdutos().addAll(Arrays.asList(p1, p2, p3));
+		
+		grupoProdutoRepository.saveAll(Arrays.asList(g1, g2, g3));
 		familiaProdutoRepository.saveAll(Arrays.asList(f1, f2));
-		
-		Produto p1 = new Produto(null, "0123456789XXX", "Coca Cola Pet 2L", 5.47, 4.82, 1000.0, 500.0, 5000.0, g1,f1);
-		Produto p2 = new Produto(null, "0123456789XXX", "Fanta Laranja Pet 2L", 4.65, 3.98, 700.0, 300.0, 1000.0, g1, f1);
-		Produto p3 = new Produto(null, "0123456789XXX", "Sprite Pet 2L", 4.65, 3.98, 300.0, 100.0, 700.0, g1, f1);
-		Produto p4 = new Produto(null, "0123456789XXX", "Coca Cola KS 290ml", 0.95, 1.50, 800.0, 100.0, 500.0, g1, f2);
-		
-		g1.getProdutos().addAll(Arrays.asList(p1));
-		g1.getProdutos().addAll(Arrays.asList(p2));
-		g1.getProdutos().addAll(Arrays.asList(p3));
-		g1.getProdutos().addAll(Arrays.asList(p4));
-		
-		ProdutoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 		
 	}
 }

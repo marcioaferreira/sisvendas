@@ -51,7 +51,8 @@ public class GrupoProdutoResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody GrupoProduto obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody GrupoProdutoDTO objDTO, @PathVariable Integer id) {
+		GrupoProduto obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
