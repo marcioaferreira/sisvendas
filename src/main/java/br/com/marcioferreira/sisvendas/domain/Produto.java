@@ -46,12 +46,22 @@ public class Produto implements Serializable {
 	@JoinColumn(name="familia_produto_id")
 	private FamiliaProduto familia;
 	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="tamanho_produto_id")
+	private TamanhoProduto tamanho;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="cor_produto_id")
+	private CorProduto cor;
+	
 	public Produto() {
 	}
 	
 	public Produto(Integer id, @NotNull @NotEmpty String codigoBarra, @NotNull @NotEmpty String descricao,
 			Double precoVenda, Double precoCusto, Double estoque, Double estoqueMinimo, Double estoqueMaximo,
-			GrupoProduto grupo, FamiliaProduto familia) {
+			GrupoProduto grupo, FamiliaProduto familia, TamanhoProduto tamanho, CorProduto cor) {
 		super();
 		this.id = id;
 		this.codigoBarra = codigoBarra;
@@ -63,6 +73,8 @@ public class Produto implements Serializable {
 		this.estoqueMaximo = estoqueMaximo;
 		this.grupo = grupo;
 		this.familia = familia;
+		this.tamanho = tamanho;
+		this.cor = cor;
 	}
 
 	public Integer getId() {
@@ -143,6 +155,22 @@ public class Produto implements Serializable {
 
 	public void setFamilia(FamiliaProduto familia) {
 		this.familia = familia;
+	}
+
+	public TamanhoProduto getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(TamanhoProduto tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public CorProduto getCor() {
+		return cor;
+	}
+
+	public void setCor(CorProduto cor) {
+		this.cor = cor;
 	}
 
 	@Override

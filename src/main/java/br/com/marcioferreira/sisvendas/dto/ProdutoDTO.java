@@ -45,6 +45,8 @@ public class ProdutoDTO implements Serializable {
 	
 	private Integer grupo;
 	private Integer familia;
+	private Integer tamanho;
+	private Integer cor;
 	
 	public ProdutoDTO() {
 	}
@@ -61,6 +63,8 @@ public class ProdutoDTO implements Serializable {
 		this.estoqueMaximo = obj.getEstoqueMinimo();
 		this.grupo = obj.getGrupo().getId();
 		this.familia = obj.getFamilia().getId();
+		this.tamanho = obj.getTamanho().getId();
+		this.cor = obj.getCor().getId();
 	}
 
 	public Integer getId() {
@@ -141,6 +145,22 @@ public class ProdutoDTO implements Serializable {
 
 	public void setFamilia(Integer familia) {
 		this.familia = familia;
+	}
+
+	public Integer getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(Integer tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public Integer getCor() {
+		return cor;
+	}
+
+	public void setCor(Integer cor) {
+		this.cor = cor;
 	}
 	
 }
