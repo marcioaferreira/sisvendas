@@ -25,7 +25,7 @@ public class TamanhoProduto implements Serializable {
 	
 	@NotNull
 	@NotEmpty
-	@Column(length=30, unique=true)
+	@Column(length=FieldConfigure.TAMANHO_DESCRICAO, unique=true)
 	private String descricao;
 	
 	@JsonIgnore

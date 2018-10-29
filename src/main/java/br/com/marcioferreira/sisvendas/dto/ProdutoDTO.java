@@ -47,6 +47,7 @@ public class ProdutoDTO implements Serializable {
 	private Integer familia;
 	private Integer tamanho;
 	private Integer cor;
+	private Integer categoria;
 	
 	public ProdutoDTO() {
 	}
@@ -65,6 +66,7 @@ public class ProdutoDTO implements Serializable {
 		this.familia = obj.getFamilia().getId();
 		this.tamanho = obj.getTamanho().getId();
 		this.cor = obj.getCor().getId();
+		this.setCategoria(obj.getCategoria().getId());
 	}
 
 	public Integer getId() {
@@ -161,6 +163,14 @@ public class ProdutoDTO implements Serializable {
 
 	public void setCor(Integer cor) {
 		this.cor = cor;
+	}
+
+	public Integer getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Integer categoria) {
+		this.categoria = categoria;
 	}
 	
 }

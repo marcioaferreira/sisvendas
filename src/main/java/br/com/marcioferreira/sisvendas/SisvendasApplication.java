@@ -7,11 +7,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.marcioferreira.sisvendas.domain.CategoriaProduto;
 import br.com.marcioferreira.sisvendas.domain.CorProduto;
 import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
 import br.com.marcioferreira.sisvendas.domain.GrupoProduto;
 import br.com.marcioferreira.sisvendas.domain.Produto;
 import br.com.marcioferreira.sisvendas.domain.TamanhoProduto;
+import br.com.marcioferreira.sisvendas.repositories.CategoriaProdutoRepository;
 import br.com.marcioferreira.sisvendas.repositories.CorProdutoRepository;
 import br.com.marcioferreira.sisvendas.repositories.FamiliaProdutoRepository;
 import br.com.marcioferreira.sisvendas.repositories.GrupoProdutoRepository;
@@ -32,6 +34,9 @@ public class SisvendasApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CorProdutoRepository corProdutoRepository;
+	
+	@Autowired
+	private CategoriaProdutoRepository CategoriaProdutoRepository;
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
@@ -55,11 +60,13 @@ public class SisvendasApplication implements CommandLineRunner {
 		
 		CorProduto c1 = new CorProduto(null, "Geral");
 		
+		CategoriaProduto cat1 = new CategoriaProduto(null, "Geral");
 		
-		Produto p1 = new Produto(null, "0123456789XXX", "Coca Cola Pet 2L", 5.47, 4.82, 1000.0, 500.0, 5000.0, g1, f2, t1, c1);
-		Produto p2 = new Produto(null, "0123456d89XXX", "Fanta Laranja Pet 2L", 4.65, 3.98, 700.0, 300.0, 1000.0, g1, f2, t1, c1);
-		Produto p3 = new Produto(null, "01234567s9XXX", "Sprite Pet 2L", 4.65, 3.98, 300.0, 100.0, 700.0, g1, f2, t1, c1);
-		Produto p4 = new Produto(null, "012345678qXXX", "Coca Cola KS 290ml", 0.95, 1.50, 800.0, 100.0, 500.0, g1, f1, t2, c1);
+		
+		Produto p1 = new Produto(null, "0123456789XXX", "Coca Cola Pet 2L", 5.47, 4.82, 1000.0, 500.0, 5000.0, g1, f2, t1, c1, cat1);
+		Produto p2 = new Produto(null, "0123456d89XXX", "Fanta Laranja Pet 2L", 4.65, 3.98, 700.0, 300.0, 1000.0, g1, f2, t1, c1, cat1);
+		Produto p3 = new Produto(null, "01234567s9XXX", "Sprite Pet 2L", 4.65, 3.98, 300.0, 100.0, 700.0, g1, f2, t1, c1, cat1);
+		Produto p4 = new Produto(null, "012345678qXXX", "Coca Cola KS 290ml", 0.95, 1.50, 800.0, 100.0, 500.0, g1, f1, t2, c1, cat1);
 		
 		g1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4));
 		
@@ -71,10 +78,13 @@ public class SisvendasApplication implements CommandLineRunner {
 		
 		c1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4));
 		
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4));
+		
 		grupoProdutoRepository.saveAll(Arrays.asList(g1, g2, g3));
 		familiaProdutoRepository.saveAll(Arrays.asList(f1, f2));
 		tamanhoProdutoRepository.saveAll(Arrays.asList(t1, t2));
 		corProdutoRepository.saveAll(Arrays.asList(c1));
+		CategoriaProdutoRepository.saveAll(Arrays.asList(cat1));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 		
 	}
