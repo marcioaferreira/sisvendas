@@ -66,7 +66,7 @@ public class ProdutoDTO implements Serializable {
 		this.familia = obj.getFamilia().getId();
 		this.tamanho = obj.getTamanho().getId();
 		this.cor = obj.getCor().getId();
-		this.setCategoria(obj.getCategoria().getId());
+		this.categoria = obj.getCategoria().getId();
 	}
 
 	public Integer getId() {

@@ -13,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class FamiliaProduto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,14 +26,13 @@ public class FamiliaProduto implements Serializable {
 	@Column(length=FieldConfigure.TAMANHO_DESCRICAO, unique=true)
 	private String descricao;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="familia")
 	private List<Produto> produtos = new ArrayList<>();
 
 	public FamiliaProduto() {
 	}
 
-	public FamiliaProduto(Integer id, String descricao) {
+	public FamiliaProduto(Integer id, @NotNull @NotEmpty String descricao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;

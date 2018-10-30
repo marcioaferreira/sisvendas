@@ -13,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class CorProduto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,14 +26,13 @@ public class CorProduto implements Serializable {
 	@Column(length=FieldConfigure.TAMANHO_DESCRICAO, unique=true)
 	private String descricao;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="cor")	
 	private List<Produto> produtos = new ArrayList<>();
 	
 	public CorProduto() {
 	}
 
-	public CorProduto(Integer id, String descricao) {
+	public CorProduto(Integer id, @NotNull @NotEmpty String descricao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;

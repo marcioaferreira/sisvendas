@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -36,37 +38,49 @@ public class Produto implements Serializable {
 	private Double estoqueMinimo;
 	private Double estoqueMaximo;
 	
+	@JsonIgnore
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="grupo_produto_id")
 	private GrupoProduto grupo;
 	
+	@JsonIgnore
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="familia_produto_id")
 	private FamiliaProduto familia;
 	
+	@JsonIgnore
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="tamanho_produto_id")
 	private TamanhoProduto tamanho;
 	
+	@JsonIgnore
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="cor_produto_id")
 	private CorProduto cor;
 	
+	@JsonIgnore
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="categoria_produto_id")
 	private CategoriaProduto categoria;
+	
+	@JsonIgnore
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="embalagem_produto_id")
+	private EmbalagemProduto embalagem;
 	
 	public Produto() {
 	}
 	
 	public Produto(Integer id, @NotNull @NotEmpty String codigoBarra, @NotNull @NotEmpty String descricao,
 			Double precoVenda, Double precoCusto, Double estoque, Double estoqueMinimo, Double estoqueMaximo,
-			GrupoProduto grupo, FamiliaProduto familia, TamanhoProduto tamanho, CorProduto cor, CategoriaProduto categoria) {
+			@NotNull GrupoProduto grupo, @NotNull FamiliaProduto familia, @NotNull TamanhoProduto tamanho,
+			@NotNull CorProduto cor, @NotNull CategoriaProduto categoria, @NotNull EmbalagemProduto embalagem) {
 		super();
 		this.id = id;
 		this.codigoBarra = codigoBarra;
@@ -81,6 +95,7 @@ public class Produto implements Serializable {
 		this.tamanho = tamanho;
 		this.cor = cor;
 		this.categoria = categoria;
+		this.embalagem = embalagem;
 	}
 
 	public Integer getId() {
@@ -185,6 +200,14 @@ public class Produto implements Serializable {
 
 	public void setCategoria(CategoriaProduto categoria) {
 		this.categoria = categoria;
+	}
+
+	public EmbalagemProduto getEmbalagem() {
+		return embalagem;
+	}
+
+	public void setEmbalagem(EmbalagemProduto embalagem) {
+		this.embalagem = embalagem;
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package br.com.marcioferreira.sisvendas.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -14,33 +16,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.marcioferreira.sisvendas.domain.FamiliaProduto;
-import br.com.marcioferreira.sisvendas.dto.FamiliaProdutoDTO;
-import br.com.marcioferreira.sisvendas.services.FamiliaProdutoServices;
+import br.com.marcioferreira.sisvendas.domain.EmbalagemProduto;
+import br.com.marcioferreira.sisvendas.dto.EmbalagemProdutoDTO;
+import br.com.marcioferreira.sisvendas.services.EmbalagemProdutoServices;
 
 @RestController
-@RequestMapping(value="/familiasprodutos")
-public class FamiliaProdutoResource {
+@RequestMapping(value="/embalagensprodutos")
+public class EmbalagemProdutoResource {
 	
 	@Autowired
-	private FamiliaProdutoServices service;
+	private EmbalagemProdutoServices service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<FamiliaProduto> findById(@PathVariable Integer id) {
-		FamiliaProduto obj = service.findById(id);
+	public ResponseEntity<EmbalagemProduto> findById(@PathVariable Integer id) {
+		EmbalagemProduto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<FamiliaProduto>> findAll() {
-		List<FamiliaProduto> list = service.findAll();
-		//List<FamiliaProdutoDTO> listDto = list.stream().map(obj -> new FamiliaProdutoDTO(obj)).collect(Collectors.toList());  
+	public ResponseEntity<List<EmbalagemProduto>> findAll() {
+		List<EmbalagemProduto> list = service.findAll();
+		//List<EmbalagemProdutoDTO> listDto = list.stream().map(obj -> new EmbalagemProdutoDTO(obj)).collect(Collectors.toList());  
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody FamiliaProdutoDTO objDTO) {
-		FamiliaProduto obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody EmbalagemProdutoDTO objDto) {
+		EmbalagemProduto obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 			.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -48,8 +50,8 @@ public class FamiliaProdutoResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody FamiliaProdutoDTO objDTO, @PathVariable Integer id) {
-		FamiliaProduto obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> update(@RequestBody EmbalagemProdutoDTO objDTO, @PathVariable Integer id) {
+		EmbalagemProduto obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -62,14 +64,13 @@ public class FamiliaProdutoResource {
 	}
 	
 	@RequestMapping(value="/pagegruposprodutos", method=RequestMethod.GET)
-	public ResponseEntity<Page<FamiliaProdutoDTO>> findPage(
+	public ResponseEntity<Page<EmbalagemProdutoDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-		Page<FamiliaProduto> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<FamiliaProdutoDTO> listDto = list.map(obj -> new FamiliaProdutoDTO(obj));  
+		Page<EmbalagemProduto> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<EmbalagemProdutoDTO> listDto = list.map(obj -> new EmbalagemProdutoDTO(obj));  
 		return ResponseEntity.ok().body(listDto);
 	}
-
 }

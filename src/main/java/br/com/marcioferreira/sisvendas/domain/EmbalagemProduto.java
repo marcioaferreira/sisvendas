@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class GrupoProduto implements Serializable {
+public class EmbalagemProduto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -26,16 +26,22 @@ public class GrupoProduto implements Serializable {
 	@Column(length=FieldConfigure.TAMANHO_DESCRICAO, unique=true)
 	private String descricao;
 	
-	@OneToMany(mappedBy="grupo")
+	@NotNull
+	@NotEmpty
+	@Column(length=FieldConfigure.TAMANNO_SIGLA, unique=true)
+	private String sigla;
+	
+	@OneToMany(mappedBy="embalagem")
 	private List<Produto> produtos = new ArrayList<>();
 
-	public GrupoProduto() {
+	public EmbalagemProduto() {
 	}
 
-	public GrupoProduto(Integer id, @NotNull @NotEmpty String descricao) {
+	public EmbalagemProduto(Integer id, @NotNull @NotEmpty String descricao, @NotNull @NotEmpty String sigla) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
+		this.sigla = sigla;
 	}
 
 	public Integer getId() {
@@ -62,6 +68,14 @@ public class GrupoProduto implements Serializable {
 		this.produtos = produtos;
 	}
 
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -78,7 +92,7 @@ public class GrupoProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GrupoProduto other = (GrupoProduto) obj;
+		EmbalagemProduto other = (EmbalagemProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

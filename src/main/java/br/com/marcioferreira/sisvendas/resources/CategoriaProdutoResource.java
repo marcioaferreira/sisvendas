@@ -2,7 +2,6 @@ package br.com.marcioferreira.sisvendas.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -35,10 +34,10 @@ public class CategoriaProdutoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<CategoriaProdutoDTO>> findAll() {
+	public ResponseEntity<List<CategoriaProduto>> findAll() {
 		List<CategoriaProduto> list = service.findAll();
-		List<CategoriaProdutoDTO> listDto = list.stream().map(obj -> new CategoriaProdutoDTO(obj)).collect(Collectors.toList());  
-		return ResponseEntity.ok().body(listDto);
+		//List<CategoriaProdutoDTO> listDto = list.stream().map(obj -> new CategoriaProdutoDTO(obj)).collect(Collectors.toList());  
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)

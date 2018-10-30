@@ -2,7 +2,6 @@ package br.com.marcioferreira.sisvendas.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -35,10 +34,10 @@ public class GrupoProdutoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<GrupoProdutoDTO>> findAll() {
+	public ResponseEntity<List<GrupoProduto>> findAll() {
 		List<GrupoProduto> list = service.findAll();
-		List<GrupoProdutoDTO> listDto = list.stream().map(obj -> new GrupoProdutoDTO(obj)).collect(Collectors.toList());  
-		return ResponseEntity.ok().body(listDto);
+		//List<GrupoProdutoDTO> listDto = list.stream().map(obj -> new GrupoProdutoDTO(obj)).collect(Collectors.toList());  
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
